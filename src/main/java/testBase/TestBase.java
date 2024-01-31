@@ -13,7 +13,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.Reporter;
+
 
 import enums.Browsers;
 import enums.OS;
@@ -113,7 +113,7 @@ public class TestBase {
 			if(fileName==""){
 				fileName = "blank";
 			}
-			Reporter.log("captureScreen method called");
+	//		Reporter.log("captureScreen method called");
 			File destFile = null;
 			Calendar calendar = Calendar.getInstance();
 			SimpleDateFormat formater = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
@@ -121,7 +121,7 @@ public class TestBase {
 			try{
 				destFile = new File(reportDirectery+"/"+fileName+"_"+formater.format(calendar.getTime())+".png");
 				Files.copy(screFile.toPath(), destFile.toPath());
-				Reporter.log("<a href='"+destFile.getAbsolutePath()+"'><img src='"+destFile.getAbsolutePath()+"'height='100' width='100'/></a>");
+		//		Reporter.log("<a href='"+destFile.getAbsolutePath()+"'><img src='"+destFile.getAbsolutePath()+"'height='100' width='100'/></a>");
 			}
 			catch(Exception e){
 				e.printStackTrace();
