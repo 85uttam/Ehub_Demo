@@ -1,6 +1,14 @@
 package reportUtils;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import testBase.TestBase;
@@ -15,7 +23,7 @@ public class ReportUtil {
 	public static double passNumber;
 	public static double failNumber;
 	public static boolean newTest = true;
-	
+
 	public static ArrayList<String> description = new ArrayList<String>();
 	public static ArrayList<String> keyword = new ArrayList<String>();
 	public static ArrayList<String> teststatus = new ArrayList<String>();
@@ -43,7 +51,7 @@ public class ReportUtil {
 			fstream = new FileWriter(getOverAllReportFilePath(filename));
 			out = new BufferedWriter(fstream);
 
-			
+
 
 			String ENVIRONMENT = env;// SeleniumServerTest.ConfigurationMap.getProperty("environment");
 			String RELEASE = rel;// SeleniumServerTest.ConfigurationMap.getProperty("release");
@@ -57,10 +65,10 @@ public class ReportUtil {
 
 			out.write("<body>\n");
 			out.write("<h4 align=center><FONT COLOR=660066 FACE=AriaL SIZE=6><b><u> Automation Test Results</u></b></h4>\n");
-			
+
 			out.write("<table  border=1 cellspacing=1 cellpadding=1 >\n");
-			
-			
+
+
 
 			out.write("<h4> <FONT COLOR=660000 FACE=Arial SIZE=4.5> <u>Test Details :</u></h4>\n");
 			String RUN_DATE = TestBase.now("dd.MMMMM.yyyy").toString();
@@ -68,21 +76,21 @@ public class ReportUtil {
 			out.write("<td width=150 align=left bgcolor=#153E7E><FONT COLOR=#E0E0E0 FACE=Arial SIZE=2.75><b>Run Date</b></td>\n");
 			out.write("<td width=150 align=left><FONT COLOR=#153E7E FACE=Arial SIZE=2.75><b>" + RUN_DATE + "</b></td>\n");
 			out.write("</tr>\n");
-			
+
 			out.write("<tr>\n");
 
 			out.write("<td width=150 align=left bgcolor=#153E7E><FONT COLOR=#E0E0E0 FACE=Arial SIZE=2.75><b>Run StartTime</b></td>\n");
 
 			out.write("<td width=150 align=left><FONT COLOR=#153E7E FACE=Arial SIZE=2.75><b>" + testStartTime + "</b></td>\n");
 			out.write("</tr>\n");
-			
+
 			out.write("<tr>\n");
 			// out.newLine();
 			String END_TIME = TestBase.now("dd.MMMMM.yyyy").toString();
 			out.write("<td width=150 align= left  bgcolor=#153E7E><FONT COLOR=#E0E0E0 FACE= Arial  SIZE=2.75><b>Run EndTime</b></td>\n");
 			out.write("<td width=150 align= left ><FONT COLOR=#153E7E FACE= Arial  SIZE=2.75><b>END_TIME</b></td>\n");
 			out.write("</tr>\n");
-			
+
 			out.write("<tr>\n");
 			// out.newLine();
 
@@ -107,7 +115,7 @@ public class ReportUtil {
 	}
 
 	public static void startSuite(String suiteName) {
-		
+
 		ReportUtil.suiteName = suiteName;
 		FileWriter fstream = null;
 		BufferedWriter out = null;
@@ -118,9 +126,9 @@ public class ReportUtil {
 			out = new BufferedWriter(fstream);
 
 			out.write("<h4> <FONT COLOR=660000 FACE= Arial  SIZE=4.5> <u>" + suiteName + " Report :</u></h4>\n");
-			
+
 			out.write("<table  border=1 cellspacing=1 cellpadding=1 width=100%>\n");
-			
+
 			out.write("<tr>\n");
 			out.write("<td width=10%  align= center  bgcolor=#153E7E><FONT COLOR=#E0E0E0 FACE= Arial  SIZE=2><b>Test Script#</b></td>\n");
 
@@ -183,9 +191,9 @@ public class ReportUtil {
 				out.write("<body>");
 
 				out.write("<h4> <FONT COLOR=660000 FACE=Arial SIZE=4.5> Detailed Report :</h4>");
-				
+
 				out.write("<table  border=1 cellspacing=1    cellpadding=1 width=100%>");
-				
+
 				out.write("<tr> ");
 				out.write("<td align=center width=10%  align=center bgcolor=#153E7E><FONT COLOR=#E0E0E0 FACE=Arial SIZE=2><b>Step/Row#</b></td>");
 				out.write("<td align=center width=50% align=center bgcolor=#153E7E><FONT COLOR=#E0E0E0 FACE=Arial SIZE=2><b>Description</b></td>");
@@ -193,7 +201,7 @@ public class ReportUtil {
 				out.write("<td align=center width=15% align=center bgcolor=#153E7E><FONT COLOR=#E0E0E0 FACE=Arial SIZE=2><b>Result</b></td>");
 				out.write("<td align=center width=15% align=center bgcolor=#153E7E><FONT COLOR=#E0E0E0 FACE=Arial SIZE=2><b>Screen Shot</b></td>");
 				out.write("</tr>");
-				
+
 				if (description != null) {
 					for (int i = 0; i < description.size(); i++) {
 						out.write("<tr> ");
@@ -233,7 +241,7 @@ public class ReportUtil {
 			}
 
 			tcid++;
-			
+
 			if (status.startsWith("Pass")) {
 				out.write("<td width=10% align= center  bgcolor=#BCE954><FONT COLOR=#153E7E FACE=Arial SIZE=2><b>" + status + "</b></td>\n");
 			} else if (status.startsWith("Fail")) {

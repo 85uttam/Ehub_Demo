@@ -17,22 +17,22 @@ import testBase.TestBase;
 import testBase.Wait;
 
 public class Keywords extends TestBase{
-	
+
 	private final static Logger logger = LoggerHelper.getLogger(Keywords.class);
-	
+
 	public static WebElement getWebElement(String locator) throws Exception{
 		//logger.info("locator data:-"+locator+"is---"+Repository.getProperty(locator));
 		String keywordValue = Repository.getProperty(locator);
 		return getLocator(keywordValue);
 	}
-	
+
 	public static List<WebElement> getWebElements(String locator) throws Exception{
 		return getLocators(Repository.getProperty(locator));
 	}
-	
+
 	public static String navigate() {
 		logger.info("Navigate is called");
-		driver.get(webElement);		
+		driver.get(webElement);
 		return "Pass";
 	}
 
@@ -45,9 +45,9 @@ public class Keywords extends TestBase{
 		}
 		return "Pass";
 	}
-	
 
-	
+
+
 	public static String inputText() {
 		logger.info("InputText is called");
 		try {
@@ -58,9 +58,9 @@ public class Keywords extends TestBase{
 		}
 		return "Pass";
 	}
-	
-	
-	
+
+
+
 	public static String clickOnLink() {
 		logger.info("ClickOnLink is called");
 		try {
@@ -72,9 +72,9 @@ public class Keywords extends TestBase{
 		}
 		return "Pass";
 	}
-	
-	
-	
+
+
+
 	public static String clickOutSide() {
 		logger.info("clickOutSide is called");
 		try {
@@ -87,7 +87,7 @@ public class Keywords extends TestBase{
 		}
 		return "Pass";
 	}
-	
+
 
 	public static String verifyText() {
 		logger.info("VerifyText is called");
@@ -117,7 +117,7 @@ public class Keywords extends TestBase{
 		}
 		return "Pass";
 	}
-	
+
 	public static String mouseOver(){
 		try {
 			expliciteWait();
@@ -130,7 +130,7 @@ public class Keywords extends TestBase{
 		}
 		return "Pass";
 	}
-	
+
 	public static String selectByValue(){
 		try {
 			expliciteWait();
@@ -154,7 +154,7 @@ public class Keywords extends TestBase{
 		}
 		return "Pass";
 	}
-	
+
 	public static String selectByIndex(){
 		try {
 			WebElement element = getWebElement(webElement);
@@ -165,8 +165,8 @@ public class Keywords extends TestBase{
 		}
 		return "Pass";
 	}
-	
-	
+
+
    /**
     * This Method will return web element.
     * @param locator
@@ -196,7 +196,7 @@ public class Keywords extends TestBase{
 		else
 			throw new Exception("Unknown locator type '" + locatorType + "'");
 	}
-	
+
 	public static List<WebElement> getLocators(String locator) throws Exception {
 		String[] split = locator.split(":");
 		String locatorType = split[0];
@@ -231,11 +231,11 @@ public class Keywords extends TestBase{
 			logger.info("Element found..."+webElement.toString());
 		} catch (Throwable e) {
 			throw new TimeoutException(webElement, e);
-			
+
 		}
-		
+
 	}
-	
+
 	/*
 	public static String expliciteWait(){
      try {
@@ -246,7 +246,7 @@ public class Keywords extends TestBase{
      return "Pass";
 	}
 	*/
-	
+
 	public static String clickWhenReady(By locator, int timeout) {
 		WebElement element = null;
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
@@ -257,7 +257,7 @@ public class Keywords extends TestBase{
 	}
 
 
-	
+
 	public static String waitFor() throws InterruptedException {
 		try {
 			Thread.sleep(5000);
@@ -266,7 +266,7 @@ public class Keywords extends TestBase{
 		}
 		return "Pass";
 	}
-	
+
 	public static Object executeScript(String script){
 		JavascriptExecutor exe = (JavascriptExecutor)driver;
 		return exe.executeScript(script);
@@ -277,46 +277,46 @@ public class Keywords extends TestBase{
 		executeScript("window.scrollTo(0,document.body.scrollHeight)");
 		return "Pass";
 	}
-	
+
 	public static String scrollTopVertically()
 	{
 		executeScript("window.scrollTo(document.body.scrollHeight, 0)");
 		return "Pass";
 	}
-	
+
 	public static String scrollDownVerticallyByPixel()
 	{
 		executeScript("window.scrollBy(0,550)");
 		return "Pass";
 	}
-	
+
 	public static String scrollIntoViewElement() throws Exception
 	{
-		
+
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView(true);", getWebElement(webElement));
-		
+
 	//	executeScript("arguments[0].scrollIntoView(true);", getWebElement(webElement));
 		return "Pass";
 	}
-	
+
 	/*
 	public static String selectDaysInDropDown() throws Exception{
 		RegistrationPage reg = new RegistrationPage();
 		String status = reg.selectDaysInDropDown();
 		return status;
 	}
-	
+
 	public static String selectMonthInDropDown() throws Exception{
 		RegistrationPage reg = new RegistrationPage();
 		return reg.selectMonthInDropDown();
 	}
-	
+
 	public static String selectYearInDropDown() throws Exception{
 		RegistrationPage reg = new RegistrationPage();
 		return reg.selectYearInDropDown();
 	}
-	
+
 	public static String selectYourAddressCountry() throws Exception{
 		RegistrationPage reg = new RegistrationPage();
 		return reg.selectYourAddressCountry();
@@ -325,5 +325,5 @@ public class Keywords extends TestBase{
 	public static void closeBrowser(){
 		driver.quit();
 	}
-	
+
 }

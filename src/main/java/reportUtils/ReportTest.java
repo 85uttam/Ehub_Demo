@@ -6,12 +6,12 @@ public class ReportTest {
 
 	/**
 	 * @param args
-	 * @throws InterruptedException 
+	 * @throws InterruptedException
 	 */
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
 		String startTime = TestBase.now("dd.MMMM.yyyy hh.mm.ss aaa");
-		
+
 		ReportUtil.startTesting("index", startTime, "Test", "1.5");
 
 		ReportUtil.startSuite("Suite1");
@@ -31,10 +31,10 @@ public class ReportTest {
 
 		ReportUtil.addKeyword("LoginTo Page", "Navigate", "Pass", null);
 		ReportUtil.addKeyword("LoginTo Page", "Navigate", "Pass", null);
-		
+
 		ReportUtil.addTestCase("Login", startTime, TestBase.now("dd.MMMM.yyyy hh.mm.ss aaa"), "Pass");
 
-		
+
 		ReportUtil.endSuite();
 		ReportUtil.updateEndTime(TestBase.now("dd.MMMM.yyyy hh.mm.ss aaa"));
 

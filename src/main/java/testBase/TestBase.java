@@ -3,6 +3,7 @@ package testBase;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Properties;
@@ -12,7 +13,6 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Reporter;
 
 import enums.Browsers;
@@ -20,10 +20,8 @@ import enums.OS;
 import excelReader.ExcelReader;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-import java.nio.file.Files;
-
 public class TestBase {
-	
+
 	public static WebDriver driver;
 	public static Properties Repository = new Properties();
 	public static Properties Config = new Properties();
@@ -40,31 +38,31 @@ public class TestBase {
 	public static String Description;
 	public static File f ;
 	public static FileInputStream FI;
-	
+
 	public static void Initialize() throws IOException {
-		
+
 		TestStepData = new ExcelReader(System.getProperty("user.dir")+"/src/test/java/testData/TestSuite1Data.xlsx");
 		SuiteData = new ExcelReader(System.getProperty("user.dir")+"/src/test/java/testData/TestSuite1.xlsx");
-		
-		
+
+
 		f = new File(System.getProperty("user.dir")+"/src/test/java/propertiesFiles/login.properties");
 		FI = new FileInputStream(f);
 		Repository.load(FI);
-		
+
 		f = new File(System.getProperty("user.dir")+"/src/test/java/propertiesFiles/homePage.Properties");
 		FI = new FileInputStream(f);
 		Repository.load(FI);
-		
+
 		f = new File(System.getProperty("user.dir")+"/src/test/java/propertiesFiles/config.properties");
 		FI = new FileInputStream(f);
 		Repository.load(FI);
-		
+
 		f = new File(System.getProperty("user.dir")+"/src/test/java/propertiesFiles/policy.properties");
 		FI = new FileInputStream(f);
 		Repository.load(FI);
-		
+
 	}
-	
+
 	public static String now(String format) {
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat fm = new SimpleDateFormat();
@@ -72,7 +70,7 @@ public class TestBase {
 	}
 
 
-	
+
 	public static WebDriver selectBrowser(String browser) {
 		if (System.getProperty("os.name").toLowerCase().contains(OS.WINDOW.name().toLowerCase())) {
 			if (browser.equalsIgnoreCase(Browsers.CHROME.name())) {
@@ -103,9 +101,9 @@ public class TestBase {
 		}
 		return driver;
 	}
-	
+
 	 static String reportDirectery = System.getProperty("user.dir")+"/src/test/java/screenshot";
-		
+
 		public static String getScreenShot(String fileName){
 			if(driver == null){
 				return null;
@@ -129,13 +127,13 @@ public class TestBase {
 			return destFile.toString();
 		}
 
-	
+
 	public static void main(String[] args) throws IOException {
 		TestBase.Initialize();
 		System.out.println(Repository.getProperty("login.signIn"));
-		
+
 		System.out.println(SuiteData.getRowCount("TC03"));
-		
+
 	}
 
 }

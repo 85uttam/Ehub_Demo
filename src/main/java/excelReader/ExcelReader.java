@@ -22,10 +22,10 @@ public class ExcelReader {
 
 	XSSFSheet sheet;
 
-	public ExcelReader(String excelPath) 
+	public ExcelReader(String excelPath)
 	{
 		this.excelPath = excelPath;
-		try 
+		try
 		{
 			fis = new FileInputStream(excelPath);
 			workbook = new XSSFWorkbook(fis);
@@ -34,7 +34,7 @@ public class ExcelReader {
 			e.printStackTrace();
 		}
 	}
-	
+
 	// find whether sheets exists
 		public boolean isSheetExist(String sheetName) {
 			int index = workbook.getSheetIndex(sheetName);
@@ -49,10 +49,10 @@ public class ExcelReader {
 		}
 
 	// returns the row count in a sheet
-	public int getRowCount(String sheetName) 
+	public int getRowCount(String sheetName)
 	{
 		int index = workbook.getSheetIndex(sheetName);
-		if (index == -1) 
+		if (index == -1)
 		{
 			return 0;
 		} else {
@@ -62,7 +62,7 @@ public class ExcelReader {
 		}
 
 	}
-	
+
 	// returns number of columns in a sheet
 		public int getColumnCount(String sheetName) {
 			// check if sheet exists
@@ -80,15 +80,15 @@ public class ExcelReader {
 		}
 
 	// returns the data from a cell
-	public String getCellData(String sheetName, String colName, int rowNum) 
+	public String getCellData(String sheetName, String colName, int rowNum)
 	{
 		int index = workbook.getSheetIndex(sheetName);
 		sheet = workbook.getSheetAt(index);
 		XSSFRow row = sheet.getRow(0);
 		int col_Num = 0;
-		for (int i = 0; i < row.getLastCellNum(); i++) 
+		for (int i = 0; i < row.getLastCellNum(); i++)
 		{
-			if (row.getCell(i).getStringCellValue().trim().equals(colName.trim())) 
+			if (row.getCell(i).getStringCellValue().trim().equals(colName.trim()))
 			{
 				col_Num = i;
 				break;
@@ -97,13 +97,13 @@ public class ExcelReader {
 
 		row = sheet.getRow(rowNum - 1);
 		XSSFCell cell = row.getCell(col_Num);
-		if (cell == null) 
+		if (cell == null)
 		{
 			// System.out.println("cell is not present");
 			return "";
 		}
 
-		switch (cell.getCellType()) 
+		switch (cell.getCellType())
 		{
 		case STRING:
 			return cell.getStringCellValue();
@@ -119,10 +119,10 @@ public class ExcelReader {
 		return colName;
 
 	}
-	
-	
-	
-	
+
+
+
+
 	// returns the data from a cell
 		public String getCellData(String sheetName, int colNum, int rowNum) {
 			try {
@@ -178,10 +178,10 @@ public class ExcelReader {
 				return "row " + rowNum + " or column " + colNum + " does not exist  in xls";
 			}
 		}
-	
-	
 
-	public boolean setCellData(String sheetName, String colName, int rowNum, String data) 
+
+
+	public boolean setCellData(String sheetName, String colName, int rowNum, String data)
 	{
 		try {
 			fis = new FileInputStream(excelPath);
@@ -194,7 +194,7 @@ public class ExcelReader {
 				return false;
 			sheet = workbook.getSheetAt(index);
 			row = sheet.getRow(0);
-			for (int i = 0; i < row.getLastCellNum(); i++) 
+			for (int i = 0; i < row.getLastCellNum(); i++)
 			{
 				// System.out.println(row.getCell(i).getStringCellValue().trim());
 				if (row.getCell(i).getStringCellValue().trim().equals(colName))
@@ -225,8 +225,8 @@ public class ExcelReader {
 		}
 		return true;
 	}
-	
-	
+
+
 	public boolean setCellData(String sheetName, int colNumber, int rowNum, String data)
     {
         try
@@ -235,13 +235,13 @@ public class ExcelReader {
             row = sheet.getRow(rowNum);
             if(row==null)
                 row = sheet.createRow(rowNum);
- 
+
             cell = row.getCell(colNumber);
             if(cell == null)
                 cell = row.createCell(colNumber);
- 
+
             cell.setCellValue(data);
- 
+
             fileOut = new FileOutputStream(excelPath);
             workbook.write(fileOut);
             fileOut.close();
@@ -253,11 +253,11 @@ public class ExcelReader {
         }
         return true;
     }
-	
-	
-	
 
-	public static void main(String[] args) 
+
+
+
+	public static void main(String[] args)
 	{
 		ExcelReader excelReader = new ExcelReader(
 		System.getProperty("user.dir") + "/src/test/java/testData/TestSuite1.xlsx");
